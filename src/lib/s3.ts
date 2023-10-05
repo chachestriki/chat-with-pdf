@@ -21,7 +21,23 @@ export async function uploadToS3(file:File) {
             Body: file
         }
 
-        const upload = s3.putObject(params)
+        const upload = s3.putObject(params).on('httpUploadProgress', evt=> {
+            console.log('uploading to s3...', parseInt(((evt.loaded*100)/evt.total).toString()))
+        } ).promise()
 
-    }   catch (error){}
+        await upload.then(data=> {
+            console.log('successfully uplaoded to S3!', file_key)
+        })
+
+        return Promise.resolve({
+            file_key,
+            file_name:file.name,
+        });
+
+    }   catch (error) {}
+}
+
+export function getS3Url(file_key: string) {
+    const url = `https://${process.env.NEXT_PUBLI_S3_BUCKET_NAME}.s3.eu-west-3.amazonaws.com/${file_key}`;
+    return url;
 }
