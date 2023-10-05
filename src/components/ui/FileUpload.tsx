@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-"use client"
+"use client";
 import { Inbox } from 'lucide-react';
-import React from 'react'
-import { useDropzone} from 'react-dropzone'
+import React from 'react';
+import { useDropzone} from 'react-dropzone';
 
 
 
