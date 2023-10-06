@@ -4,7 +4,7 @@
 import { Inbox } from 'lucide-react';
 import React from 'react';
 import { useDropzone} from 'react-dropzone';
-
+import { uploadToS3 } from '@/lib/s3';
 
 
 const FileUpload = () => {
